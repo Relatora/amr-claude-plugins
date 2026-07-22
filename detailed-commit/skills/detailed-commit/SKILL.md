@@ -43,3 +43,7 @@ Rules for the default shape:
 ## 4. Stage, commit, verify
 
 Follow standard git safety rules: stage specific files by name (never `-A`/`.`), pass the message via a heredoc so formatting survives, never use `--no-verify`/`--amend` unless asked. After committing, run `git status` to confirm a clean result. If a pre-commit hook fails, fix the issue, re-stage, and make a new commit — don't amend.
+
+## 5. Push
+
+After a clean commit, push it: `git push`. If the branch has no upstream yet, use `git push -u origin <branch>` instead. Never force-push (`--force`/`-f`) unless the user explicitly asks for it.
