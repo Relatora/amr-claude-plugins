@@ -13,7 +13,11 @@ Check, in order: an issue number passed as an argument to this skill, one mentio
 
 ## 2. Gather the real changes — never fabricate
 
-Run in parallel: `git status`, `git diff` (unstaged) and `git diff --staged` (staged), `git log --oneline -15`. If nothing is staged, the diff to describe is the unstaged working tree; if something is already staged, describe the staged diff — don't mix in unrelated unstaged noise.
+Run in parallel: `git status`, `git diff` (unstaged) and `git diff --staged` (staged), `git log --oneline -15`.
+
+If something is already staged, describe the staged diff — don't mix in unrelated unstaged noise, and skip straight to step 3.
+
+If nothing is staged but the working tree has uncommitted changes (modified, deleted, or untracked files), ask the user via AskUserQuestion whether to stage everything and commit it all as one commit, or hold off so they can stage what they want first. Offer exactly these two options: "Stage everything and commit it all" and "I'll stage what I want myself". If the user doesn't answer — declines the question, or the session is non-interactive — default to the first option: stage everything and commit it all. "Stage everything" means adding every file shown in `git status` by name (never `-A`/`.` — see step 4), not skipping files because they look like a separate concern; splitting into multiple commits only happens when the user asks for it or picks the second option and stages a subset themselves.
 
 Read any changed file whose diff hunk alone doesn't explain the "why" or full scope — describe what actually changed, not just what the patch lines say out of context.
 
@@ -42,7 +46,7 @@ Rules for the default shape:
 
 ## 4. Stage, commit, verify
 
-Follow standard git safety rules: stage specific files by name (never `-A`/`.`), pass the message via a heredoc so formatting survives, never use `--no-verify`/`--amend` unless asked. After committing, run `git status` to confirm a clean result. If a pre-commit hook fails, fix the issue, re-stage, and make a new commit — don't amend.
+Staging scope was already decided in step 2 — either the user staged things themselves, or this skill staged every changed/untracked file by name per the default there. Stage by explicit filename only (never `-A`/`.`), even when the scope is "everything" — list every file `git status` showed. Pass the commit message via a heredoc so formatting survives. Never use `--no-verify`/`--amend` unless asked. After committing, run `git status` to confirm a clean result. If a pre-commit hook fails, fix the issue, re-stage, and make a new commit — don't amend.
 
 ## 5. Push
 
