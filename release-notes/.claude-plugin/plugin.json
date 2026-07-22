@@ -1,7 +1,7 @@
 {
   "name": "release-notes",
   "description": "Generate a release notes markdown file for a repo from its pending/uncommitted changes (and unreleased commits), plus a plain bullet list for pasting into an issue tracker.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Amr Abdallah",
     "url": "https://github.com/Relatora"

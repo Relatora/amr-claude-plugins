@@ -22,6 +22,9 @@ Produce two things from a repo's pending changes:
 - Read the manifest the repo actually uses (`package.json` version, or equivalent — `pyproject.toml`, `Cargo.toml`, `*.csproj`, etc.).
 - If that manifest hasn't been bumped yet for this release, pick the next version by the repo's own existing scheme (semver patch/minor per its own history — check the last few `vX.Y.Z:` commit messages for the pattern, e.g. one repo may patch-bump per release, another minor-bump). Each repo's version sequence is independent — never force sibling repos (client/server) to share a version number.
 - Flag in your chat response (not in the doc) if the manifest still needs a manual bump before tagging — don't silently edit the version yourself unless asked.
+- **If a doc already exists at `docs/Releases/RELEASE_NOTES_v<manifest-version>.md`** (manifest version == an existing doc's version), don't assume that doc is still in-progress. Check for a release marker at or after the doc's last-touched point (see step 6.3 for how to find that point): a git tag matching that version, or a commit message shaped `vX.Y.Z: <summary>` for that same version. That marker means the release already shipped — new commits belong to the *next* version, not that doc.
+  - Marker found → this is a new release. Skip straight to writing a new doc at the next version (step 3), don't augment.
+  - No marker, genuinely ambiguous → **ask the user** via AskUserQuestion before writing anything: augment the existing `vX.Y.Z` doc (still in progress), start a new `vX.Y.Z+1` doc (already shipped, this is the next release — name the specific next version you'd use as the option label), or let them type a specific version. Never silently pick one when it's unclear — guessing wrong means either polluting an already-shipped release's notes or silently dropping new work into a doc no one will read as current.
 
 ## 3. Write the doc
 
@@ -72,7 +75,7 @@ After writing the file(s), give the user a plain bullet list per repo, terse, no
 
 ## 6. Augmenting an existing, not-yet-released doc with new commits
 
-When the user made one or more commits *after* a `docs/Releases/RELEASE_NOTES_v<version>.md` for the in-progress version was already written, and wants it updated — merge in, don't create a second file and don't regenerate the whole doc from scratch.
+When the user made one or more commits *after* a `docs/Releases/RELEASE_NOTES_v<version>.md` for the in-progress version was already written, and wants it updated — merge in, don't create a second file and don't regenerate the whole doc from scratch. This whole section only applies once step 2 has confirmed the target doc is still in-progress (no release marker found, or the user picked "augment") — never augment a doc for a version that already shipped.
 
 1. **Find the doc.** The highest-version file in `docs/Releases/` whose version is still ahead of (or equal to) the last actual release tag/commit — i.e. the one covering the release still in progress.
 2. **Read it first**, in full — you need its existing structure to merge into.
