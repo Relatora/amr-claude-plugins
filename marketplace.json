@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    {
+      "name": "release-notes",
+      "source": { "type": "github", "repo": "Relatora/amr-claude-plugins", "path": "release-notes" }
+    },
+    {
+      "name": "detailed-commit",
+      "source": { "type": "github", "repo": "Relatora/amr-claude-plugins", "path": "detailed-commit" }
+    }
+  ]
+}
