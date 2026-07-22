@@ -1,12 +1,23 @@
 {
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "amr-claude-plugins",
+  "description": "Personal Claude Code plugins.",
+  "owner": {
+    "name": "Amr Abdallah",
+    "url": "https://github.com/Relatora"
+  },
   "plugins": [
     {
       "name": "release-notes",
-      "source": { "type": "github", "repo": "Relatora/amr-claude-plugins", "path": "release-notes" }
+      "description": "Generate a release notes markdown file for a repo from its pending/uncommitted changes, plus a plain bullet list for pasting into an issue tracker.",
+      "source": "./release-notes",
+      "category": "productivity"
     },
     {
       "name": "detailed-commit",
-      "source": { "type": "github", "repo": "Relatora/amr-claude-plugins", "path": "detailed-commit" }
+      "description": "Draft and create a detailed git commit message (subject + bullet list of concrete changes + optional Issue #NN footer). Asks for the issue number if none is given.",
+      "source": "./detailed-commit",
+      "category": "productivity"
     }
   ]
 }

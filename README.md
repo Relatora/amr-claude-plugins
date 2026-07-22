@@ -29,9 +29,9 @@ Each plugin installs and updates independently — you don't need all of them.
    ├── skills/<plugin-name>/SKILL.md
    └── README.md
    ```
-3. Add an entry for it to `.claude-plugin/marketplace.json`'s `plugins` array:
+3. Add an entry for it to `.claude-plugin/marketplace.json`'s `plugins` array — `source` is a path relative to the marketplace file, same repo so just `./<plugin-name>`:
    ```json
-   { "name": "<plugin-name>", "source": { "type": "github", "repo": "Relatora/amr-claude-plugins", "path": "<plugin-name>" } }
+   { "name": "<plugin-name>", "description": "<one-liner>", "source": "./<plugin-name>", "category": "productivity" }
    ```
 4. Commit and push.
 5. `/plugin install <plugin-name>` on any machine that already has this marketplace added (run `/plugin marketplace update` first if it doesn't pick up the new entry automatically).
