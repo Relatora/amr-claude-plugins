@@ -4,7 +4,7 @@ Personal Claude Code plugins, one subdirectory per plugin, installable independe
 
 ## Install on any machine
 
-```
+```text
 /plugin marketplace add Relatora/amr-claude-plugins
 /plugin install release-notes
 /plugin install detailed-commit
@@ -23,13 +23,13 @@ Each plugin installs and updates independently — you don't need all of them.
 
 1. Author and test the skill's `SKILL.md` wherever's convenient (a project's own `.claude/skills/` while iterating works fine).
 2. Add a new top-level directory here named after the plugin:
-   ```
+   ```text
    <plugin-name>/
    ├── .claude-plugin/plugin.json   # { "name", "description", "version": "0.1.0" }
    ├── skills/<plugin-name>/SKILL.md
    └── README.md
    ```
-3. Add an entry for it to the root `marketplace.json`'s `plugins` array:
+3. Add an entry for it to `.claude-plugin/marketplace.json`'s `plugins` array:
    ```json
    { "name": "<plugin-name>", "source": { "type": "github", "repo": "Relatora/amr-claude-plugins", "path": "<plugin-name>" } }
    ```
