@@ -1,5 +1,5 @@
 {
   "name": "detailed-commit",
   "description": "Draft and create a detailed git commit message (subject + bullet list of concrete changes + optional Issue #NN footer). Prompts for an issue number if none is given or found in context.",
-  "version": "0.1.0"
+  "version": "1.0.0"
 }
