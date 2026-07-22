@@ -46,7 +46,7 @@ Rules for the default shape:
 
 ## 4. Stage, commit, verify
 
-Staging scope was already decided in step 2 — either the user staged things themselves, or this skill staged every changed/untracked file by name per the default there. Stage by explicit filename only (never `-A`/`.`), even when the scope is "everything" — list every file `git status` showed. Pass the commit message via a heredoc so formatting survives. Never use `--no-verify`/`--amend` unless asked. After committing, run `git status` to confirm a clean result. If a pre-commit hook fails, fix the issue, re-stage, and make a new commit — don't amend.
+Staging scope was already decided in step 2 — either the user staged things themselves, or this skill staged every changed/untracked file by name per the default there. Stage by explicit filename only (never `-A`/`.`), even when the scope is "everything" — list every file `git status` showed. Pass the commit message via a heredoc so formatting survives. Never use `--no-verify`/`--amend` unless asked. After committing, run `git status` to confirm a clean result, **and** `git log -1 --format=%B` to confirm the message itself matches what was drafted in step 3 — bullets present, and (unless "no issue" was chosen) the `Issue #<N>` footer actually landed. `git status` only proves the tree is clean; it says nothing about whether the heredoc dropped a line. If the footer or a bullet is missing, fix it now with `--amend` before moving to step 5 — this is the one case amending is expected, since nothing has been pushed yet. If a pre-commit hook fails instead, fix the issue, re-stage, and make a new commit — don't amend.
 
 ## 5. Push
 
